@@ -1,0 +1,21 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+<script src="{% static 'chat.js' %}"></script>
+<div id="room-name" style="display: none;">{{ chat_room.id }}</div>
+{% block content %}
+  <h2>Chat Room {{ chat_room.id }}</h2>
+  {% for message in chat_room.message_set.all %}
+    <p>
+      <strong>{{ message.user.username }}</strong>: {{ message.text }}
+      {% if message.image %}
+      <img src="{{ message.image.url }}" alt="Image message">
+      {% endif %}
+    </p>
+  {% endfor %}
+  <form method="post">
+  {% csrf_token %}
+    <textarea id="chat-message-input" name="text"></textarea>
+    <button id="chat-message-submit" type="submit">Send</button>
+  </form>
+{% endblock %}

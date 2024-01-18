@@ -1,0 +1,11 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>New Message</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <textarea name="text"></textarea>
+        <input type="file" name="image">
+        <button type="submit">Send</button>
+    </form>
+{% endblock %}
